@@ -1,12 +1,12 @@
   <!-- Header -->
-<?php include './views/layout/Header.php' ?>
+  <?php include './views/layout/Header.php' ?>
 
   <!-- Navbar -->
-<?php include './views/layout/Navbar.php' ?>
+  <?php include './views/layout/Navbar.php' ?>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-<?php include './views/layout/Sidebar.php' ?>
+  <?php include './views/layout/Sidebar.php' ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -32,14 +32,13 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="<?= BASE_URL_ADMIN . '?act=Add-Category'?>" method="POST">
+              <form action="<?= BASE_URL_ADMIN . '?act=Add-Category' ?>" method="POST">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Category Name</label>
                     <input type="text" class="form-control" name="ten_danh_muc" placeholder="Enter Category">
-                    <?php if(isset($errors['ten_danh_muc']))
-                    { ?>
-                        <p class="text-danger"><?=$errors['ten_danh_muc']?></p>
+                    <?php if (isset($errors['ten_danh_muc'])) { ?>
+                      <p class="text-danger"><?= $errors['ten_danh_muc'] ?></p>
                     <?php } ?>
                   </div>
                   <div class="form-group">
@@ -64,19 +63,20 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- Footer -->
-<?php include './views/layout/Footer.php' ?>
-<!-- End Footer -->
+  <!-- Footer -->
+  <?php include './views/layout/Footer.php' ?>
+  <!-- End Footer -->
 
-</body>
-</html>
+  </body>
+
+  </html>

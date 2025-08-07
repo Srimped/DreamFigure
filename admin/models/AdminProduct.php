@@ -12,7 +12,28 @@ class AdminProduct
     public function GetAllProduct()
     {
         try {
-            $sql = 'SELECT * FROM san_phams';
+            $sql = 'SELECT 
+                        san_phams.*, 
+                        danh_mucs.ten_danh_muc, 
+                        hinh_anh_san_phams.link_hinh_anh
+                    FROM 
+                        san_phams
+                    JOIN 
+                        danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                    LEFT JOIN (
+                        SELECT 
+                            san_pham_id, 
+                            link_hinh_anh
+                        FROM 
+                            hinh_anh_san_phams
+                        WHERE 
+                            id IN (
+                                SELECT MIN(id)
+                                FROM hinh_anh_san_phams
+                                GROUP BY san_pham_id
+                            )
+                    ) AS hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
+                    ';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -24,24 +45,21 @@ class AdminProduct
         }
     }
 
-    public function CreateProduct($productName, $productPrice,  $productDiscount, $productQuantity, $productDate, $categoryID, $productStatus, $productDes, $file_thumb)
+    public function CreateProduct($productName, $productPrice, $productQuantity, $categoryID, $productStatus, $productDes)
     {
         try {
-            $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh)
-                    VALUE (:ten_san_pham, :gia_san_pham, :gia_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
+            $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, so_luong, danh_muc_id, trang_thai, mo_ta)
+                    VALUE (:ten_san_pham, :gia_san_pham, :so_luong, :danh_muc_id, :trang_thai, :mo_ta)';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
                 ':ten_san_pham' => $productName,
                 ':gia_san_pham' => $productPrice,
-                ':gia_khuyen_mai' => $productDiscount,
                 ':so_luong' => $productQuantity,
-                ':ngay_nhap' => $productDate,
                 ':danh_muc_id' => $categoryID,
                 ':trang_thai' => $productStatus,
                 ':mo_ta' => $productDes,
-                ':hinh_anh' => $file_thumb,
             ]);
 
             // lấy id sản phẩm vừa thêm
@@ -107,20 +125,38 @@ class AdminProduct
         }
     }
 
-    public function UpdateProduct($productID, $productName, $productPrice, $productDiscount, $productQuantity, $productDate, $categoryID, $productStatus, $productDes, $image)
+    public function GetFirstImage($id)
+{
+    try {
+        $sql = 'SELECT *
+                FROM hinh_anh_san_phams
+                WHERE san_pham_id = :id
+                ORDER BY id ASC
+                LIMIT 1';
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->execute([
+            ':id' => $id
+        ]);
+
+        return $stmt->fetch();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+    public function UpdateProduct($productID, $productName, $productPrice, $productQuantity, $categoryID, $productStatus, $productDes)
     {
         try {
             $sql = 'UPDATE san_phams 
                     SET
                         ten_san_pham = :ten_san_pham, 
                         gia_san_pham = :gia_san_pham, 
-                        gia_khuyen_mai = :gia_khuyen_mai, 
                         so_luong = :so_luong, 
-                        ngay_nhap = :ngay_nhap, 
                         danh_muc_id = :danh_muc_id, 
                         trang_thai = :trang_thai, 
                         mo_ta = :mo_ta, 
-                        hinh_anh = :hinh_anh
                     WHERE id = :id';
 
 
@@ -129,13 +165,10 @@ class AdminProduct
             $stmt->execute([
                 ':ten_san_pham' => $productName,
                 ':gia_san_pham' => $productPrice,
-                ':gia_khuyen_mai' => $productDiscount,
                 ':so_luong' => $productQuantity,
-                ':ngay_nhap' => $productDate,
                 ':danh_muc_id' => $categoryID,
                 ':trang_thai' => $productStatus,
                 ':mo_ta' => $productDes,
-                ':hinh_anh' => $image,
                 ':id' => $productID,
             ]);
 

@@ -33,19 +33,12 @@ class AdminProductController
             // lấy dữ liệu
             $productName = $_POST['ten_san_pham'] ?? '';
             $productPrice = $_POST['gia_san_pham'] ?? '';
-            $productDiscount = $_POST['gia_khuyen_mai'] ?? '';
             $productQuantity = $_POST['so_luong'] ?? '';
-            $productDate = $_POST['ngay_nhap'] ?? '';
             $categoryID = $_POST['danh_muc_id'] ?? '';
             $productStatus = $_POST['trang_thai'] ?? '';
             $productDes = $_POST['mo_ta'] ?? '';
 
-            // dữ liệu hình ảnh
-            $image = $_FILES['hinh_anh'] ?? null;
-
-            // lưu ảnh
-            $file_thumb = UploadFile($image, './uploads/');
-
+            //lưu ảnh album
             $imageArray = $_FILES['img_array'];
 
 
@@ -61,21 +54,14 @@ class AdminProductController
             if (empty($productQuantity)) {
                 $errors['so_luong'] = 'Please enter amount of products';
             }
-            if (empty($productDate)) {
-                $errors['ngay_nhap'] = 'Date can not be null';
-            }
             if ($categoryID == 0) {
                 $errors['danh_muc_id'] = 'Please select category';
             }
             if (empty($productStatus)) {
                 $errors['trang_thai'] = 'Please select status';
             }
-            if ($image['error'] !== 0) {
-                $errors['hinh_anh'] = 'Please select image';
-            }
 
             $_SESSION['error'] = $errors;
-
 
             // nếu như không có lỗi thì thực thi
             if (empty($errors)) {
@@ -83,13 +69,10 @@ class AdminProductController
                 $productID = $this->productModel->CreateProduct(
                     $productName,
                     $productPrice,
-                    $productDiscount,
                     $productQuantity,
-                    $productDate,
                     $categoryID,
                     $productStatus,
-                    $productDes,
-                    $file_thumb
+                    $productDes
                 );
 
                 // Thêm album ảnh vào sản phẩm
@@ -142,20 +125,13 @@ class AdminProductController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy dữ liệu 
             $productID = $_POST['san_pham_id'] ?? '';
-            $oldProduct = $this->productModel->GetSelectProduct($productID);
-            $oldFiles = $oldProduct['hinh_anh']; //lấy ảnh cũ để sửa
 
             $productName = $_POST['ten_san_pham'] ?? '';
             $productPrice = $_POST['gia_san_pham'] ?? '';
-            $productDiscount = $_POST['gia_khuyen_mai'] ?? '';
             $productQuantity = $_POST['so_luong'] ?? '';
-            $productDate = $_POST['ngay_nhap'] ?? '';
             $categoryID = $_POST['danh_muc_id'] ?? '';
             $productStatus = $_POST['trang_thai'] ?? '';
             $productDes = $_POST['mo_ta'] ?? '';
-
-            // dữ liệu hình ảnh
-            $image = $_FILES['hinh_anh'] ?? null;
 
             //tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
@@ -164,12 +140,6 @@ class AdminProductController
             }
             if (empty($productPrice)) {
                 $errors['gia_san_pham'] = 'Please enter product price';
-            }
-            if (empty($productQuantity)) {
-                $errors['so_luong'] = 'Please enter amount of products';
-            }
-            if (empty($productDate)) {
-                $errors['ngay_nhap'] = 'Date can not be null';
             }
             if ($categoryID == 0) {
                 $errors['danh_muc_id'] = 'Please select category';
@@ -180,19 +150,6 @@ class AdminProductController
 
             $_SESSION['error'] = $errors;
 
-            $newFile = $oldFiles;
-
-            // kiểm tra nếu upload ảnh mới ok
-            if (isset($image) && $image['error'] === UPLOAD_ERR_OK) {
-                // up ảnh mới
-                $newFile = UploadFile($image, './uploads/');
-
-                // xóa ảnh cũ nếu có
-                if (!empty($oldFiles)) {
-                    DeleteFile($oldFiles);
-                }
-            }
-
             // nếu như không có lỗi thì thực thi
             if (empty($errors)) {
                 // sửa product
@@ -200,13 +157,10 @@ class AdminProductController
                     $productID,
                     $productName,
                     $productPrice,
-                    $productDiscount,
                     $productQuantity,
-                    $productDate,
                     $categoryID,
                     $productStatus,
                     $productDes,
-                    $newFile
                 );
                 $_SESSION['message'] = 'New Product has been added';
                 header("Location: " . BASE_URL_ADMIN . '?act=Product');
@@ -313,6 +267,7 @@ class AdminProductController
         $id = $_GET['Product-id'];
         $product = $this->productModel->GetSelectProduct($id);
         $listImage = $this->productModel->GetProductImage($id);
+        $firstImage = $this->productModel->GetFirstImage($id);
         if ($product) {
             require_once './views/Product/DetailProduct.php';
             DeleteSesstionError();

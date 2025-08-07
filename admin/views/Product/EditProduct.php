@@ -57,25 +57,10 @@
                     <?php } ?>
                 </div>
                 <div class="form-group">
-                  <label>Discount</label>
-                  <input type="number" name="gia_khuyen_mai" class="form-control" value="<?= $product['gia_khuyen_mai'] ?>">
-                </div>
-                <div class="form-group">
-                  <label>Image</label>
-                  <input type="file" name="hinh_anh" class="form-control">
-                </div>
-                <div class="form-group">
                   <label>Quantity</label>
                   <input type="text" name="so_luong" class="form-control" value="<?= $product['so_luong'] ?>">
                   <?php if (isset($_SESSION['error']['so_luong'])) { ?>
                     <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
-                  <?php } ?>
-                </div>
-                <div class="form-group">
-                  <label>Date</label>
-                  <input type="date" name="ngay_nhap" class="form-control" value="<?= $product['ngay_nhap'] ?>">
-                  <?php if (isset($_SESSION['error']['ngay_nhap'])) { ?>
-                    <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
                   <?php } ?>
                 </div>
                 <div class="form-group">

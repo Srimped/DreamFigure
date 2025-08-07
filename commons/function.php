@@ -72,3 +72,18 @@ function UploadAlbumFiles($file, $uploadFolder, $key)
     }
     return null;
 }
+
+
+// format ngày
+function FormatDate($date)
+{
+    return date("d-m-Y", strtotime($date));
+}
+
+function Auth()
+{
+    if (!isset($_SESSION['user_admin'])) {
+        header("Location: " . BASE_URL_ADMIN . '?act=Login');
+        exit();
+    }
+}

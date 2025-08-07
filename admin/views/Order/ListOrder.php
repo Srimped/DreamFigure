@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Product Management</h1>
+            <h1>Order Management</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -30,9 +30,6 @@
 
             <div class="card">
               <div class="card-header">
-                <a href="<?= BASE_URL_ADMIN . '?act=Add-Product-Form' ?>">
-                  <button class="btn btn-success">New Product</button>
-                </a>
                 <?php if (isset($_SESSION['message'])) {
                   echo '<p class="text-success">' . $_SESSION['message'] . '</p>';
                   unset($_SESSION['message']);
@@ -44,42 +41,31 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Product</th>
-                      <th>Price</th>
-                      <!-- <th>Discount</th> -->
-                      <th>Image</th>
-                      <th>Quantity</th>
-                      <!-- <th>Views</th> -->
-                      <!-- <th>Create Date</th> -->
-                      <th>Descriptions</th>
-                      <th>Category</th>
+                      <th>Order ID</th>
+                      <th>Recipient Name</th>
+                      <th>Phone Number</th>
+                      <th>Order Date</th>
+                      <th>Total Amount</th>
                       <th>Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach ($productList as $key => $product): ?>
+                    <?php foreach ($orderList as $key => $order): ?>
                       <tr>
                         <td><?= $key + 1 ?></td>
-                        <td><?= $product['ten_san_pham'] ?></td>
-                        <td><?= $product['gia_san_pham'] ?></td>
+                        <td><?= $order['ma_don_hang'] ?></td>
+                        <td><?= $order['ten_nguoi_nhan'] ?></td>
+                        <td><?= $order['sdt_nguoi_nhan'] ?></td>
+                        <td><?= $order['ngay_dat'] ?></td>
+                        <td><?= $order['tong_tien'] ?></td>
+                        <td><?= $order['ten_trang_thai'] ?></td>
                         <td>
-                          <img src="<?= BASE_URL . $product['link_hinh_anh'] ?>" style="width: 100px" alt=""
-                            onerror="this.onerror=null; this.src='https://yameteshop.vn/wp-content/uploads/2023/06/mohinh-herta-kuru-1.jpg'">
-                        </td>
-                        <td><?= $product['so_luong'] ?></td>
-                        <td><?= $product['mo_ta'] ?></td>
-                        <td><?= $product['ten_danh_muc'] ?></td>
-                        <td><?= $product['trang_thai'] == 1 ? 'Available' : 'Out of order' ?></td>
-                        <td>
-                          <a href="<?= BASE_URL_ADMIN . '?act=Detail-Product&Product-id=' . $product['id'] ?>">
-                            <button class="btn btn-primary">Detail</button>
+                          <a href="<?= BASE_URL_ADMIN . '?act=Detail-Order&Order-id=' . $order['id'] ?>">
+                            <button class="btn btn-primary"><i class="fas fa-eye"></i></button>
                           </a>
-                          <a href="<?= BASE_URL_ADMIN . '?act=Edit-Product-Form&Product-id=' . $product['id'] ?>">
-                            <button class="btn btn-warning">Edit</button>
-                          </a>
-                          <a href="<?= BASE_URL_ADMIN . '?act=Delete-Product&Product-id=' . $product['id'] ?>"
-                            onclick="return confirm('Do you want to delete this Product?')">
-                            <button class="btn btn-danger">Delete</i></button>
+                          <a href="<?= BASE_URL_ADMIN . '?act=Edit-Order-Form&Order-id=' . $order['id'] ?>">
+                            <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
                           </a>
                         </td>
                       </tr>

@@ -75,6 +75,13 @@ CREATE TABLE `chuc_vus` (
   `ten_chuc_vu` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+-- Insert default roles
+INSERT INTO chuc_vus (id, ten_chuc_vu) VALUES
+(1, 'Admin'),
+(2, 'Client');
+
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +93,13 @@ CREATE TABLE `danh_mucs` (
   `ten_danh_muc` varchar(255) NOT NULL,
   `mo_ta` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Sample categories
+INSERT INTO danh_mucs (id, ten_danh_muc) VALUES
+(1, 'Figma'),
+(2, 'Nendoroid'),
+(3, 'Scale Figure'),
+(4, 'Prize Figure');
 
 -- --------------------------------------------------------
 
@@ -152,11 +166,8 @@ CREATE TABLE `san_phams` (
   `id` int NOT NULL,
   `ten_san_pham` varchar(255) NOT NULL,
   `gia_san_pham` decimal(10,2) NOT NULL,
-  `gia_khuyen_mai` decimal(10,2) DEFAULT NULL,
-  `hinh_anh` varchar(255) DEFAULT NULL,
   `so_luong` int NOT NULL,
   `luot_xem` int DEFAULT '0',
-  `ngay_nhap` date NOT NULL,
   `mo_ta` text,
   `danh_muc_id` int NOT NULL,
   `trang_thai` tinyint NOT NULL DEFAULT '1'
@@ -181,6 +192,12 @@ CREATE TABLE `tai_khoans` (
   `chuc_vu_id` int NOT NULL,
   `trang_thai` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Sample admin + client users (password: 123@456 hashed with bcrypt)
+INSERT INTO tai_khoans (id, ho_ten, email, mat_khau, chuc_vu_id, trang_thai) VALUES
+(1, 'Admin', 'admin@gmail.com', '$2y$10$9zXnGP4RNPqycm0dmeEPX.eLMi78zJJXwN2j6PlX1U69.1m0l8Pae', 1, 1),
+(2, 'Client', 'client@gmail.com', '$2y$10$8w5xU4v0c6hMqs3x442jP.o1K5rsyvl7zhxQ/pUgQReYTFILHOY36', 2, 1);
+
 
 -- --------------------------------------------------------
 

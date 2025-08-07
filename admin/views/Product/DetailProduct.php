@@ -20,7 +20,7 @@
             <div class="col-12 col-sm-6">
               <h3 class="d-inline-block d-sm-none"></h3>
               <div class="col-12">
-                <img src="<?= BASE_URL . $product['hinh_anh'] ?>" class="product-image" alt="Product Image">
+                <img src="<?= BASE_URL . $firstImage['link_hinh_anh'] ?>" class="product-image" alt="Product Image">
               </div>
               <div class="col-12 product-image-thumbs">
                 <?php foreach ($listImage as $key => $img): ?>
@@ -33,18 +33,14 @@
               <h5><?= $product['mo_ta'] ?></h5>
 
               <hr>
-              <h4 class="my-3">Date: <small><?= $product['ngay_nhap'] ?></small></h4>
               <h4 class="my-3">Quantity: <small><?= $product['so_luong'] ?></small></h4>
               <h4 class="my-3">Viewer: <small><?= $product['luot_xem'] ?></small></h4>
               <h4 class="my-3">Category: <small><?= $product['ten_danh_muc'] ?></small></h4>
               <h4 class="my-3">Status: <small><?= $product['trang_thai'] == 1 ? 'Available' : 'Out of stock' ?></small></h4>
               <div class="bg-gray py-2 px-3 mt-4">
                 <h2 class="mb-0">
-                  <?= $product['gia_san_pham'] ?>
+                  Price: <?= $product['gia_san_pham'] ?>
                 </h2>
-                <h4 class="mt-0">
-                  Sales: <small><?= $product['gia_khuyen_mai'] ?> </small>
-                </h4>
               </div>
 
               <div class="mt-4 product-share">
@@ -64,40 +60,38 @@
 
             </div>
           </div>
-          <div class="row mt-4">
-            <nav class="w-100">
-              <div class="nav nav-tabs" id="product-tab" role="tablist">
-                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="product-desc" aria-selected="true">Comments</a>
-              </div>
-            </nav>
-            <div class="tab-content p-3" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="comment" role="tabpanel" aria-labelledby="product-desc-tab">
-                <div class="container-fluid">
-                  <table class="table table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Username</th>
-                        <th>Content</th>
-                        <th>Upload Date</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <th>1</th>
-                      <th>Nguyen Van A</th>
-                      <th>Good Product</th>
-                      <th>06/08/2025</th>
-                      <th>
-                        <div class="btn-group">
-                          <a href="#"><button class="btn btn-warning">Hide</button></a>
-                          <a href="#"><button class="btn btn-danger">Delete</button></a>
-                        </div>
-                      </th>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+          <nav>
+            <div class="nav nav-tabs row mt-4" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Content</th>
+                    <th>Upload Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <th>1</th>
+                  <th>Nguyen Van A</th>
+                  <th>Good Product</th>
+                  <th>06/08/2025</th>
+                  <th>
+                    <div class="btn-group">
+                      <a href="#"><button class="btn btn-warning">Hide</button></a>
+                      <a href="#"><button class="btn btn-danger">Delete</button></a>
+                    </div>
+                  </th>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

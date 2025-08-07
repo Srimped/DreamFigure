@@ -52,7 +52,6 @@ class AdminCategoryController
                 require_once './views/Category/AddCategory.php';
             }
         }
-
     }
 
     public function CategoryEditingForm()
@@ -105,7 +104,6 @@ class AdminCategoryController
                 require_once './views/Category/EditCategory.php';
             }
         }
-
     }
 
     public function DeleteCategory()
