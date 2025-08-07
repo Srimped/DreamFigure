@@ -1,12 +1,12 @@
   <!-- Header -->
-<?php include './views/layout/Header.php' ?>
+  <?php include './views/layout/Header.php' ?>
 
   <!-- Navbar -->
-<?php include './views/layout/Navbar.php' ?>
+  <?php include './views/layout/Navbar.php' ?>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-<?php include './views/layout/Sidebar.php' ?>
+  <?php include './views/layout/Sidebar.php' ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -33,40 +33,48 @@
                 <?php if (isset($_SESSION['message'])) {
                   echo '<p class="text-success">' . $_SESSION['message'] . '</p>';
                   unset($_SESSION['message']);
-                }?>
+                } ?>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr>
+                      <th>No</th>
+                      <th>Full Name</th>
+                      <th>Image</th>
+                      <th>Email</th>
+                      <th>Phone Number</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <?php foreach($clientList as $key=>$client): ?>
-                  <tr>
-                    <td><?= $key+1?></td>
-                    <td><?=$client['ho_ten']?></td>
-                    <td><?=$client['email']?></td>
-                    <td><?=$client['so_dien_thoai']?></td>
-                    <td><?=$client['trang_thai'] == 1 ? 'Active' : 'Inactive'?></td>
-                    <td>
-                      <a href="<?= BASE_URL_ADMIN . '?act=Edit-Client-Form&Client-id=' . $client['id']?>">
-                        <button class="btn btn-warning">Edit</button>
-                      </a>
-                      <a href="<?= BASE_URL_ADMIN . '?act=Reset-Password&Account-id=' . $client['id']?>" 
-                      onclick="return confirm('Do you want to reset password this account?')">
-                        <button class="btn btn-danger">Reset</button>
-                      </a>
-                    </td>
-                  </tr>
-                  <?php endforeach ?>  
+                    <?php foreach ($clientList as $key => $client): ?>
+                      <tr>
+                        <td><?= $key + 1 ?></td>
+                        <td><?= $client['ho_ten'] ?></td>
+                        <td>
+                          <img src="<?= BASE_URL . $client['anh_dai_dien'] ?>" style="width: 100px" alt=""
+                            onerror="this.onerror=null; this.src='https://www.pngplay.com/wp-content/uploads/12/Anime-Girl-Pfp-PNG-HD-Quality.png'">
+                        </td>
+                        <td><?= $client['email'] ?></td>
+                        <td><?= $client['so_dien_thoai'] ?></td>
+                        <td><?= $client['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
+                        <td>
+                          <a href="<?= BASE_URL_ADMIN . '?act=Detail-Client&Client-id=' . $client['id'] ?>">
+                            <button class="btn btn-primary">Detail</button>
+                          </a>
+                          <a href="<?= BASE_URL_ADMIN . '?act=Edit-Client-Form&Client-id=' . $client['id'] ?>">
+                            <button class="btn btn-warning">Edit</button>
+                          </a>
+                          <a href="<?= BASE_URL_ADMIN . '?act=Reset-Password&Account-id=' . $client['id'] ?>"
+                            onclick="return confirm('Do you want to reset password this account?')">
+                            <button class="btn btn-danger">Reset</button>
+                          </a>
+                        </td>
+                      </tr>
+                    <?php endforeach ?>
                   </tbody>
                 </table>
               </div>
@@ -83,37 +91,40 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- Footer -->
-<?php include './views/layout/Footer.php' ?>
-<!-- End Footer -->
+  <!-- Footer -->
+  <?php include './views/layout/Footer.php' ?>
+  <!-- End Footer -->
 
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+  <script>
+    $(function() {
+      $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
     });
-  });
-</script>
+  </script>
 
-</body>
-</html>
+  </body>
+
+  </html>

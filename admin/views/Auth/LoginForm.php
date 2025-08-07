@@ -19,7 +19,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="./assets/index2.html"><b>Dream</b> Figure</a>
+            <a href="./assets/index2.html">Shop <b>DAM</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

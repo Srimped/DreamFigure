@@ -69,6 +69,11 @@ match ($act) {
     'Add-Client' =>(new AdminAccountController())->PostAddingClient(),
     'Edit-Client-Form' =>(new AdminAccountController())->ClientEditingForm(),
     'Edit-Client' =>(new AdminAccountController())->PostEditingClient(),
+    'Detail-Client' =>(new AdminAccountController())->DetailClient(),
+
+    //Route bình luận
+    'Update-Status-Comment' =>(new AdminProductController())->UpdateStatusComment(),
+    
 
 
     // 'Profile' =>(new AdminAccountController())->Profile(),

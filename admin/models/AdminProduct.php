@@ -126,25 +126,25 @@ class AdminProduct
     }
 
     public function GetFirstImage($id)
-{
-    try {
-        $sql = 'SELECT *
+    {
+        try {
+            $sql = 'SELECT *
                 FROM hinh_anh_san_phams
                 WHERE san_pham_id = :id
                 ORDER BY id ASC
                 LIMIT 1';
 
-        $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
 
-        $stmt->execute([
-            ':id' => $id
-        ]);
+            $stmt->execute([
+                ':id' => $id
+            ]);
 
-        return $stmt->fetch();
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
-}
 
     public function UpdateProduct($productID, $productName, $productPrice, $productQuantity, $categoryID, $productStatus, $productDes)
     {
@@ -198,7 +198,6 @@ class AdminProduct
 
     public function updateAlbum($id, $new_File)
     {
-        var_dump($new_File);
         try {
             $sql = 'UPDATE hinh_anh_san_phams 
                     SET
@@ -250,6 +249,88 @@ class AdminProduct
             ]);
 
             return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    //bình luận
+    public function GetCommentFromClient($id)
+    {
+        try {
+            $sql = 'SELECT binh_luans.*, san_phams.ten_san_pham
+            FROM binh_luans
+            INNER JOIN san_phams ON binh_luans.san_pham_id = san_phams.id
+            WHERE binh_luans.tai_khoan_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    public function GetCommentFromProduct($id)
+    {
+        try {
+            $sql = 'SELECT binh_luans.*, tai_khoans.ho_ten
+            FROM binh_luans
+            INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
+            WHERE binh_luans.san_pham_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    public function GetSelectComment($id)
+    {
+        try {
+            $sql = 'SELECT * FROM binh_luans WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    public function UpdateStatusCommnet($id, $status)
+    {
+        try {
+            $sql = 'UPDATE binh_luans
+                    SET
+                        trang_thai = :trang_thai
+
+                    WHERE id = :id';
+
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':trang_thai' => $status,
+                ':id' => $id,
+            ]);
+
+            // lấy id sản phẩm vừa thêm
+            return True;
         } catch (Exception $e) {
             echo "Error" . $e->getMessage();
         }

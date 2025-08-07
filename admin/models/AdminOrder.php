@@ -83,201 +83,26 @@ class AdminOrder
         }
     }
 
-    // public function CreateProduct($productName, $productPrice,  $productDiscount, $productQuantity, $productDate, $categoryID, $productStatus, $productDes, $file_thumb)
-    // {
-    //     try {
-    //         $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh)
-    //                 VALUE (:ten_san_pham, :gia_san_pham, :gia_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
+    public function GetOrderFromClient($id)
+    {
+        try {
+            $sql = 'SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai
+            FROM don_hangs
+            INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
+            WHERE don_hangs.tai_khoan_id = :id
+            ';
 
-    //         $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
 
-    //         $stmt->execute([
-    //             ':ten_san_pham' => $productName,
-    //             ':gia_san_pham' => $productPrice,
-    //             ':gia_khuyen_mai' => $productDiscount,
-    //             ':so_luong' => $productQuantity,
-    //             ':ngay_nhap' => $productDate,
-    //             ':danh_muc_id' => $categoryID,
-    //             ':trang_thai' => $productStatus,
-    //             ':mo_ta' => $productDes,
-    //             ':hinh_anh' => $file_thumb,
-    //         ]);
+            $stmt->execute([
+                ':id' => $id
+            ]);
 
-    //         // lấy id sản phẩm vừa thêm
-    //         return $this->conn->lastInsertId();
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
 
-    // public function AddAlbumToProduct($productID, $imageLink)
-    // {
-    //     try {
-    //         $sql = 'INSERT INTO hinh_anh_san_phams (san_pham_id, link_hinh_anh)
-    //                 VALUE (:san_pham_id, :link_hinh_anh)';
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':san_pham_id' => $productID,
-    //             ':link_hinh_anh' => $imageLink
-    //         ]);
-
-    //         // lấy id sản phẩm vừa thêm
-    //         return $this->conn->lastInsertId();
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-
-    // public function GetSelectProduct($id)
-    // {
-    //     try {
-    //         $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
-    //         FROM san_phams
-    //         INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-    //         WHERE san_phams.id = :id';
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':id' => $id
-    //         ]);
-
-    //         return $stmt->fetch();
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-    // public function GetProductImage($id)
-    // {
-    //     try {
-    //         $sql = 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id';
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':id' => $id
-    //         ]);
-
-    //         return $stmt->fetchAll();
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-
-    // public function UpdateProduct($productID, $productName, $productPrice, $productDiscount, $productQuantity, $productDate, $categoryID, $productStatus, $productDes, $image)
-    // {
-    //     try {
-    //         $sql = 'UPDATE san_phams 
-    //                 SET
-    //                     ten_san_pham = :ten_san_pham, 
-    //                     gia_san_pham = :gia_san_pham, 
-    //                     gia_khuyen_mai = :gia_khuyen_mai, 
-    //                     so_luong = :so_luong, 
-    //                     ngay_nhap = :ngay_nhap, 
-    //                     danh_muc_id = :danh_muc_id, 
-    //                     trang_thai = :trang_thai, 
-    //                     mo_ta = :mo_ta, 
-    //                     hinh_anh = :hinh_anh
-    //                 WHERE id = :id';
-
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':ten_san_pham' => $productName,
-    //             ':gia_san_pham' => $productPrice,
-    //             ':gia_khuyen_mai' => $productDiscount,
-    //             ':so_luong' => $productQuantity,
-    //             ':ngay_nhap' => $productDate,
-    //             ':danh_muc_id' => $categoryID,
-    //             ':trang_thai' => $productStatus,
-    //             ':mo_ta' => $productDes,
-    //             ':hinh_anh' => $image,
-    //             ':id' => $productID,
-    //         ]);
-
-    //         // lấy id sản phẩm vừa thêm
-    //         return True;
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-
-    // public function GetDetailProductImg($id)
-    // {
-    //     try {
-    //         $sql = 'SELECT * FROM hinh_anh_san_phams WHERE id = :id';
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':id' => $id
-    //         ]);
-
-    //         return $stmt->fetch();
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-
-    // public function updateAlbum($id, $new_File)
-    // {
-    //     var_dump($new_File);
-    //     try {
-    //         $sql = 'UPDATE hinh_anh_san_phams 
-    //                 SET
-    //                     link_hinh_anh = :new_File
-
-    //                 WHERE id = :id';
-
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':new_File' => $new_File,
-    //             ':id' => $id,
-    //         ]);
-
-    //         // lấy id sản phẩm vừa thêm
-    //         return True;
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-
-    // public function DestroyProductImg($id)
-    // {
-    //     try {
-    //         $sql = 'DELETE FROM hinh_anh_san_phams WHERE id = :id';
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':id' => $id
-    //         ]);
-
-    //         return true;
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
-
-    // public function DestroyProduct($productID)
-    // {
-    //     try {
-    //         $sql = 'DELETE FROM san_phams WHERE id = :id';
-
-    //         $stmt = $this->conn->prepare($sql);
-
-    //         $stmt->execute([
-    //             ':id' => $productID
-    //         ]);
-
-    //         return true;
-    //     } catch (Exception $e) {
-    //         echo "Error" . $e->getMessage();
-    //     }
-    // }
+    
 }

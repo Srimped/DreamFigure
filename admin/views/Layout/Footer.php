@@ -1,9 +1,6 @@
 </div>
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Dream-Figure</b>
-    </div>
-    <strong>Where your dream become ours!</strong>
   </footer>
 
   <!-- jQuery -->

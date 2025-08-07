@@ -4,9 +4,9 @@
 // Khai báo dưới dạng HẰNG SỐ để không phải dùng $GLOBALS
 
 // Đường dẫn đến phần của Client
-define('BASE_URL'       , 'http://localhost/Dream-Figure/');
+define('BASE_URL'       , 'http://localhost/ShopDAM/');
 // Đường dẫn đến phần của Admin
-define('BASE_URL_ADMIN'       , 'http://localhost/Dream-Figure/admin/');
+define('BASE_URL_ADMIN'       , 'http://localhost/ShopDAM/admin/');
 
 define('DB_HOST'    , 'localhost');
 define('DB_PORT'    , 3306);

@@ -268,12 +268,39 @@ class AdminProductController
         $product = $this->productModel->GetSelectProduct($id);
         $listImage = $this->productModel->GetProductImage($id);
         $firstImage = $this->productModel->GetFirstImage($id);
+        $commentList = $this->productModel->GetCommentFromProduct($id);
         if ($product) {
             require_once './views/Product/DetailProduct.php';
             DeleteSesstionError();
         } else {
             header("Location: " . BASE_URL_ADMIN . '?act=Product');
             exit();
+        }
+    }
+
+    public function UpdateStatusComment()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $commentID = $_POST['Comment-id'];
+            $nameView = $_POST['name_view'];
+            $comment = $this->productModel->GetSelectComment($commentID);
+
+            if ($comment) {
+                $updateStatus = '';
+                if ($comment['trang_thai'] == 1) {
+                    $updateStatus = 2;
+                } else {
+                    $updateStatus = 1;
+                }
+                $status = $this->productModel->UpdateStatusCommnet($commentID, $updateStatus);
+                if ($status) {
+                    if ($nameView == 'Client Detail') {
+                        header("Location: " . BASE_URL_ADMIN . '?act=Detail-Client&Client-id=' . $comment['tai_khoan_id']);
+                    } else {
+                        header("Location: " . BASE_URL_ADMIN . '?act=Detail-Product&Product-id=' . $comment['san_pham_id']);
+                    }
+                }
+            }
         }
     }
 }

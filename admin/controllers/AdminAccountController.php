@@ -3,10 +3,14 @@
 class AdminAccountController
 {
     public $accountModel;
+    public $orderModel;
+    public $productModel;
 
     public function __construct()
     {
         $this->accountModel = new AdminAccount();
+        $this->orderModel = new AdminOrder();
+        $this->productModel = new AdminProduct();
     }
 
     public function AdminList()
@@ -184,6 +188,23 @@ class AdminAccountController
             DeleteSesstionError();
         } else {
             header("Location: " . BASE_URL_ADMIN . '?act=Client-Account');
+            exit();
+        }
+    }
+
+    public function DetailClient()
+    {
+        $id = $_GET['Client-id'];
+        $client = $this->accountModel->GetSelectAccount($id);
+
+        $orderList = $this->orderModel->GetOrderFromClient($id);
+
+        $commentList = $this->productModel->GetCommentFromClient(($id));
+        if ($client && $orderList && $commentList) {
+            require_once './views/Account/Client/DetailClient.php';
+            DeleteSesstionError();
+        } else {
+            header("Location: " . BASE_URL_ADMIN . '?act=Detail-Client');
             exit();
         }
     }

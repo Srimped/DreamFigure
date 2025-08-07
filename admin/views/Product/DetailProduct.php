@@ -60,44 +60,47 @@
 
             </div>
           </div>
-          <nav>
-            <div class="nav nav-tabs row mt-4" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-            </div>
-          </nav>
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-              <table class="table table-striped table-hover">
+          <div class="col-12">
+            <hr>
+            <h2>Comment</h2>
+            <div>
+              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>No</th>
                     <th>Username</th>
                     <th>Content</th>
-                    <th>Upload Date</th>
+                    <th>Post Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <th>1</th>
-                  <th>Nguyen Van A</th>
-                  <th>Good Product</th>
-                  <th>06/08/2025</th>
-                  <th>
-                    <div class="btn-group">
-                      <a href="#"><button class="btn btn-warning">Hide</button></a>
-                      <a href="#"><button class="btn btn-danger">Delete</button></a>
-                    </div>
-                  </th>
+                  <?php foreach ($commentList as $key => $comment): ?>
+                    <tr>
+                      <td><?= $key + 1 ?></td>
+                      <td><a target="_blank" href="<?= BASE_URL_ADMIN . '?act=Detail-Client&Client-id=' . $comment['tai_khoan_id'] ?>"><?= $comment['ho_ten']  ?></a></td>
+                      <td><?= $comment['noi_dung'] ?></td>
+                      <td><?= $comment['ngay_dang'] ?></td>
+                      <td><?= $comment['trang_thai'] == 1 ? 'Showed' : 'Hidden' ?></td>
+                      <td>
+                        <form action="<?= BASE_URL_ADMIN . '?act=Update-Status-Comment' ?>" method="POST">
+                          <input type="hidden" name="Comment-id" value="<?= $comment['id'] ?>">
+                          <input type="hidden" name="name_view" value="Product Detail">
+                          <button type="submit" onclick="return confirm('Do you want to hide this comment?')" class="btn btn-warning">
+                            <?= $comment['trang_thai'] == 1 ? 'Hide' : 'Show' ?>
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>
           </div>
+          <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
+        <!-- /.card -->
 
     </section>
     <!-- /.content -->

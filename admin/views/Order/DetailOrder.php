@@ -21,7 +21,7 @@
                       <form action="" method="POST">
                           <select name="" id="" class="form-group">
                               <?php foreach ($statusList as $key => $status): ?>
-                                  <option  <?= $status['id'] == $order['trang_thai_id'] ? 'selected': '' ?> value="<?= $status['id']?>"><?=$status['ten_trang_thai']?></option>
+                                  <option <?= $status['id'] == $order['trang_thai_id'] ? 'selected' : '' ?> value="<?= $status['id'] ?>"><?= $status['ten_trang_thai'] ?></option>
                               <?php endforeach ?>
                           </select>
                       </form>
@@ -54,7 +54,7 @@
                           <div class="row">
                               <div class="col-12">
                                   <h4>
-                                      <i class="fas fa-globe"></i> Dream Figure.
+                                      <i class="fas fa-globe"></i> ShopDAM.
                                       <small class="float-right">Date: <?= FormatDate($order['ngay_dat']) ?></small>
                                   </h4>
                               </div>
@@ -108,6 +108,7 @@
                                           </tr>
                                       </thead>
                                       <tbody>
+                                          <?php $total = 0; ?>
                                           <?php foreach ($orderProducts as $key => $product): ?>
                                               <tr>
                                                   <td><?= $key + 1 ?></td>
