@@ -200,7 +200,7 @@ class AdminAccountController
         $orderList = $this->orderModel->GetOrderFromClient($id);
 
         $commentList = $this->productModel->GetCommentFromClient(($id));
-        if ($client && $orderList && $commentList) {
+        if ($client) {
             require_once './views/Account/Client/DetailClient.php';
             DeleteSesstionError();
         } else {

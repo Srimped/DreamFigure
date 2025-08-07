@@ -156,6 +156,12 @@ CREATE TABLE `phuong_thuc_thanh_toans` (
   `ten_phuong_thuc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO phuong_thuc_thanh_toans (id, ten_phuong_thuc) VALUES
+(1, 'Cash on Delivery'),
+(2, 'Bank Transfer'),
+(3, 'Credit Card'),
+(4, 'VNPay');
+
 -- --------------------------------------------------------
 
 --
@@ -209,6 +215,20 @@ CREATE TABLE `trang_thai_don_hangs` (
   `id` int NOT NULL,
   `ten_trang_thai` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO trang_thai_don_hangs (id, ten_trang_thai) VALUES
+(1, 'Not Verify'),
+(2, 'Verified'),
+(3, 'Unpaid'),
+(4, 'Paid'),
+(5, 'Preparing'),
+(6, 'Delivering'),
+(7, 'Delivered'),
+(8, 'Received'),
+(9, 'Successed'),
+(10, 'Completed'),
+(11, 'Canceled');
 
 --
 -- Indexes for dumped tables
