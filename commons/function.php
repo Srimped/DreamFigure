@@ -49,8 +49,9 @@ function DeleteSesstionError()
 {
     if (isset($_SESSION['flash'])) {
         unset($_SESSION['flash']);
-        session_unset();
-        session_destroy();
+        unset($_SESSION['error']);
+        // session_unset();
+        // session_destroy();
     }
 }
 
@@ -86,4 +87,9 @@ function Auth()
         header("Location: " . BASE_URL_ADMIN . '?act=Login');
         exit();
     }
+}
+
+function PriceFormat($price)
+{
+    return number_format($price, 0, ',', '.');
 }

@@ -66,7 +66,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= BASE_URL_ADMIN . '?act=Profile' ?>" class="nav-link">
+              <a href="<?= BASE_URL_ADMIN . '?act=AccountSetting' ?>" class="nav-link">
                 <i class="nav-icon far fa-user"></i>
                 <p>Profile</p>
               </a>

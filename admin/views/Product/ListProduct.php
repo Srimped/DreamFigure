@@ -67,7 +67,10 @@
                             onerror="this.onerror=null; this.src='https://yameteshop.vn/wp-content/uploads/2023/06/mohinh-herta-kuru-1.jpg'">
                         </td>
                         <td><?= $product['so_luong'] ?></td>
-                        <td><?= $product['mo_ta'] ?></td>
+                        <td style="max-width: 200px; white-space: normal; word-break: break-word;">
+                          <?= $product['mo_ta'] ?>
+                        </td>
+
                         <td><?= $product['ten_danh_muc'] ?></td>
                         <td><?= $product['trang_thai'] == 1 ? 'Available' : 'Out of order' ?></td>
                         <td>

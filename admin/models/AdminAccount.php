@@ -85,6 +85,29 @@ class AdminAccount
         }
     }
 
+    public function UpdateProfile($accountID, $accountName, $accountDOB, $accountEmail, $accountPhone, $accountSex, $accountAddress)
+    {
+        try {
+            $sql = 'UPDATE tai_khoans SET ho_ten = :ho_ten, ngay_sinh = :ngay_sinh, email = :email, so_dien_thoai = :so_dien_thoai, gioi_tinh = :gioi_tinh, dia_chi = :dia_chi WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':ho_ten' => $accountName,
+                ':email' => $accountEmail,
+                ':so_dien_thoai' => $accountPhone,
+                ':ngay_sinh' => $accountDOB,
+                ':gioi_tinh' => $accountSex,
+                ':dia_chi' => $accountAddress,
+                ':id' => $accountID
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
     public function ResetPassword($id, $password)
     {
         try {
@@ -128,14 +151,29 @@ class AdminAccount
                 } else {
                     return "There no permisson to entry";
                 }
-            }
-            else
-            {
+            } else {
                 return "Wrong email or password";
             }
         } catch (Exception $e) {
             echo "Error" . $e->getMessage();
             return false;
+        }
+    }
+
+    public function GetAccountFromEmail($email)
+    {
+        try {
+            $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':email' => $email
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
         }
     }
 }

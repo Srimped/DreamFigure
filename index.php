@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
@@ -9,6 +10,9 @@ require_once './controllers/HomeController.php';
 
 // Require toàn bộ file Models
 require_once './models/Product.php';
+require_once './models/Category.php';
+require_once './models/Account.php';
+require_once './models/Cart.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -18,5 +22,14 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     '/' => (new HomeController()) ->Home(),
 
-    'product-list' => (new HomeController()) ->ProductList(),
+    'Detail-Product' => (new HomeController()) ->DetailProduct(),
+    'Add-Cart' => (new HomeController()) ->AddToCart(),
+    'Cart' => (new HomeController()) ->Cart(),
+
+    'Login' => (new HomeController()) ->LoginForm(),
+    'Logout' => (new HomeController()) ->Logout(),
+    'Check-Login' => (new HomeController()) ->Login(),
+    
+
+    // 'product-list' => (new HomeController()) ->ProductList(),
 };

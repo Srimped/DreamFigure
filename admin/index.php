@@ -71,6 +71,11 @@ match ($act) {
     'Edit-Client' =>(new AdminAccountController())->PostEditingClient(),
     'Detail-Client' =>(new AdminAccountController())->DetailClient(),
 
+    //Route profile
+    'AccountSetting' =>(new AdminAccountController())->AccountSetting(),
+    'Update-Account' =>(new AdminAccountController())->UpdateAccount(),
+    'Update-Password' =>(new AdminAccountController())->UpdatePassword(),
+
     //Route bình luận
     'Update-Status-Comment' =>(new AdminProductController())->UpdateStatusComment(),
     

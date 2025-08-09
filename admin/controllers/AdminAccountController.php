@@ -312,8 +312,121 @@ class AdminAccountController
     {
         if (isset($_SESSION['user_admin'])) {
             unset($_SESSION['user_admin']);
+            unset($_SESSION['error']);
             header("Location: " . BASE_URL_ADMIN . '?act=Login');
             exit();
+        }
+    }
+
+    public function AccountSetting()
+    {
+        $email = $_SESSION['user_admin'];
+        $data = $this->accountModel->GetAccountFromEmail($email);
+        require_once './views/Account/Profile/AccountSetting.php';
+        DeleteSesstionError();
+    }
+
+    public function UpdatePassword()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $oldPassword = $_POST['old_password'];
+            $newPassword = $_POST['new_password'];
+            $confirmPassword = $_POST['confirm_password'];
+
+            $user = $this->accountModel->GetAccountFromEmail($_SESSION['user_admin']);
+
+            $checkPassword = password_verify($oldPassword, $user['mat_khau']);
+
+            //tạo 1 mảng trống để chứa dữ liệu
+            $errors = [];
+            if (empty($oldPassword)) {
+                $errors['old_password'] = 'Please fill old password';
+            }
+            if (empty($newPassword)) {
+                $errors['new_password'] = 'please enter your new password';
+            }
+            if (empty($confirmPassword)) {
+                $errors['confirm_password'] = 'Please input one more time of your new password';
+            }
+            if (!$checkPassword) {
+                $errors['old_password_notify'] = 'Wrong old password';
+            }
+            if ($newPassword !== $confirmPassword) {
+                $errors['confirm_password_notify'] = 'Confirm password does not match';
+            }
+
+            $_SESSION['error'] = $errors;
+
+            if (!$errors) {
+                $password = password_hash($newPassword, PASSWORD_BCRYPT);
+                $status = $this->accountModel->ResetPassword($user['id'], $password);
+                if ($status) {
+                    $_SESSION['password_changed'] = 'Password has been changed';
+                    header("Location: " . BASE_URL_ADMIN . '?act=AccountSetting');
+                    exit();
+                }
+            } else {
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL_ADMIN . '?act=AccountSetting');
+                exit();
+            }
+        }
+    }
+
+    public function UpdateAccount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // lấy dữ liệu
+            $user = $this->accountModel->GetAccountFromEmail($_SESSION['user_admin']);
+            $oldEmail = $user['email'];
+            $accountID = $user['id'];
+            $accountName = $_POST['ho_ten'];
+            $accountDOB = $_POST['ngay_sinh'];
+            $accountEmail = $_POST['email'];
+            $accountPhone = $_POST['so_dien_thoai'];
+            $accountSex = $_POST['gioi_tinh'];
+            $accountAddress = $_POST['dia_chi'];
+
+            //tạo 1 mảng trống để chứa dữ liệu
+            $errors = [];
+            if (empty($accountName)) {
+                $errors['ho_ten'] = 'Please fill your full name';
+            }
+            if (empty($accountEmail)) {
+                $errors['email'] = 'Email can not be empty';
+            }
+            if (empty($accountDOB)) {
+                $errors['ngay_sinh'] = 'Please enter your birth day';
+            }
+
+            $_SESSION['error'] = $errors;
+
+            // nếu như không có lỗi thì thực thi
+            if (empty($errors)) {
+                // thêm Account
+                $this->accountModel->UpdateProfile(
+                    $accountID,
+                    $accountName,
+                    $accountDOB,
+                    $accountEmail,
+                    $accountPhone,
+                    $accountSex,
+                    $accountAddress
+                );
+                $_SESSION['information_changed'] = 'Information has been updated';
+                if($oldEmail !== $accountEmail)
+                {
+                    $_SESSION['user_admin'] = $accountEmail;
+                }
+                header("Location: " . BASE_URL_ADMIN . '?act=AccountSetting');
+                exit();
+            } else {
+                // trả về form và lỗi
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL_ADMIN . '?act=AccountSetting');
+                exit();
+            }
         }
     }
 }

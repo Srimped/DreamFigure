@@ -156,7 +156,7 @@ class AdminProduct
                         so_luong = :so_luong, 
                         danh_muc_id = :danh_muc_id, 
                         trang_thai = :trang_thai, 
-                        mo_ta = :mo_ta, 
+                        mo_ta = :mo_ta
                     WHERE id = :id';
 
 
