@@ -56,7 +56,7 @@
                         <td><?= $client['ho_ten'] ?></td>
                         <td>
                           <img src="<?= BASE_URL . $client['anh_dai_dien'] ?>" style="width: 100px" alt=""
-                            onerror="this.onerror=null; this.src='https://www.pngplay.com/wp-content/uploads/12/Anime-Girl-Pfp-PNG-HD-Quality.png'">
+                            onerror="this.onerror=null; this.src='https://i.pinimg.com/1200x/bc/43/98/bc439871417621836a0eeea768d60944.jpg'">
                         </td>
                         <td><?= $client['email'] ?></td>
                         <td><?= $client['so_dien_thoai'] ?></td>

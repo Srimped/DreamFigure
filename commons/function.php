@@ -93,3 +93,10 @@ function PriceFormat($price)
 {
     return number_format($price, 0, ',', '.');
 }
+
+function getCategories()
+{
+    require_once './models/Category.php';
+    $categoryModel = new Category();
+    return $categoryModel->GetAllCategory();
+}

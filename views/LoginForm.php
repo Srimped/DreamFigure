@@ -34,15 +34,24 @@
                         <div class="col-lg-12">
                             <div class="login-reg-form-wrap">
                                 <h5 class="text-center">Sign In</h5>
-                                <?php if (isset($_SESSION['error'])) { ?>
-                                    <p class="text-danger text-center"><?= $_SESSION['error'] ?></p>
+                                <?php if (isset($_SESSION['login_error'])) { ?>
+                                    <p class="text-danger text-center"><?= $_SESSION['login_error'] ?></p>
+                                    <?php unset($_SESSION['login_error']); ?>
                                 <?php } ?>
                                 <form action="<?= BASE_URL . '?act=Check-Login' ?>" method="post">
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Enter your Email" name="email" required />
+                                        <input type="email" name="email" placeholder="Enter your Email" required />
+                                        <?php if (isset($_SESSION['error']['email'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['email'] ?></p>
+                                        <?php } ?>
+                                        <?php unset($_SESSION['error']['email']); ?>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="password" placeholder="Enter your Password" name="mat_khau" required />
+                                        <input type="password" name="mat_khau" placeholder="Enter your Password" required />
+                                        <?php if (isset($_SESSION['error']['password'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['password'] ?></p>
+                                        <?php } ?>
+                                        <?php unset($_SESSION['error']['password']); ?>
                                     </div>
                                     <div class="single-input-item">
                                         <div class="login-reg-form-meta d-flex align-items-center justify-content-between">

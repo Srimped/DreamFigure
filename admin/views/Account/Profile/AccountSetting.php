@@ -31,7 +31,7 @@
                   <div class="col-md-3">
                       <div class="text-center">
                           <img src="<?= BASE_URL_ADMIN . $data['anh_dai_dien'] ?>" width="100px" class="avatar img-circle" alt="avatar"
-                              onerror="this.onerror=null; this.src='https://www.pngplay.com/wp-content/uploads/12/Anime-Girl-Pfp-PNG-HD-Quality.png'">
+                              onerror="this.onerror=null; this.src='https://i.pinimg.com/1200x/bc/43/98/bc439871417621836a0eeea768d60944.jpg'">
                           <h4 class="mt-2"><strong><?= $data['ho_ten'] ?></strong></h4>
                           <h6 class="mt-2"><?= $data['chuc_vu_id'] == 1 ? 'Admin' : 'Client' ?? '' ?></h6>
                       </div>
@@ -98,12 +98,6 @@
                               <label class="col-lg-3 control-label">Address:</label>
                               <div class="col-lg-12">
                                   <input class="form-control" type="text" value="<?= $data['dia_chi'] ?? '' ?>" name="dia_chi">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-lg-3 control-label">Avatar:</label>
-                              <div class="col-lg-12">
-                                  <input type="file" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">

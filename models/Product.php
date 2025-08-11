@@ -65,6 +65,42 @@ class Product
         }
     }
 
+    public function SearchProduct($keyword)
+    {
+        try {
+            $sql = "SELECT 
+                        san_phams.*, 
+                        danh_mucs.ten_danh_muc, 
+                        hinh_anh_san_phams.link_hinh_anh
+                    FROM 
+                        san_phams
+                    JOIN 
+                        danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                    LEFT JOIN (
+                        SELECT 
+                            san_pham_id, 
+                            link_hinh_anh
+                        FROM 
+                            hinh_anh_san_phams
+                        WHERE 
+                            id IN (
+                                SELECT MIN(id)
+                                FROM hinh_anh_san_phams
+                                GROUP BY san_pham_id
+                            )
+                    ) AS hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
+                    WHERE ten_san_pham LIKE '%" . $keyword . "%'";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
     public function GetProductImage($id)
     {
         try {

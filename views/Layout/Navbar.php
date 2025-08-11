@@ -29,22 +29,17 @@
                                     <ul>
                                         <li><a href="<?= BASE_URL ?>">Home</a>
                                         </li>
-                                        <li><a href="blog-left-sidebar.html">Figure <i class="fa fa-angle-down"></i></a>
+                                        <li><a href="<?= BASE_URL . '?act=Shop' ?>">Figure <i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
-                                                <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                <li><a href="blog-list-left-sidebar.html">blog list left sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
-                                                <li><a href="blog-list-right-sidebar.html">blog list right sidebar</a></li>
-                                                <li><a href="blog-grid-full-width.html">blog grid full width</a></li>
-                                                <li><a href="blog-details.html">blog details</a></li>
-                                                <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
-                                                <li><a href="blog-details-audio.html">blog details audio</a></li>
-                                                <li><a href="blog-details-video.html">blog details video</a></li>
-                                                <li><a href="blog-details-image.html">blog details image</a></li>
+                                                <?php
+                                                $categories = getCategories();
+                                                foreach ($categories as $key => $category): ?>
+                                                    <li><a href="<?= BASE_URL . '?act=Shop&Category-Id=' . $category['id'] ?>"><?= $category['ten_danh_muc'] ?></a></li>
+                                                <?php endforeach ?>
                                             </ul>
                                         </li>
 
-                                        <li><a href="contact-us.html">Contact us</a></li>
+                                        <li><a href="<?= BASE_URL . '?act=Contact'?>">Contact us</a></li>
                                     </ul>
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -58,8 +53,9 @@
                         <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                             <div class="header-search-container">
                                 <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                <form class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Input your dream figure" class="header-search-field">
+                                <form class="header-search-box d-lg-none d-xl-block" method="POST" action="<?= BASE_URL ?>?act=Search">
+                                    <input type="text" placeholder="Search for figure" class="header-search-field" name="keyword"
+                                        value="<?= isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : '' ?>">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>

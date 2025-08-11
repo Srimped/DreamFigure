@@ -8,6 +8,7 @@ class HomeController
     public $cartModel;
     public $orderModel;
 
+
     public function __construct()
     {
         $this->productModel = new Product();
@@ -24,11 +25,41 @@ class HomeController
         require_once './views/Home.php';
     }
 
+    public function Contact()
+    {
+        require_once './views/Contact.php';
+    }
+
     public function ProductList()
     {
         $productList = $this->productModel->GetAllProduct();
         require_once './views/ListProduct.php';
     }
+
+    public function Shop()
+    {
+        $categoryList = $this->categoryModel->GetAllCategory();
+
+        if (!empty($_GET['keyword'])) {
+            $keyword = $_GET['keyword'];
+            $productList = $this->productModel->SearchProduct($keyword);
+        } else {
+            $productList = $this->productModel->GetAllProduct();
+        }
+        require_once './views/shop.php';
+    }
+
+
+    public function Search()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $keyword = $_POST['keyword'] ?? '';
+            header("Location: " . BASE_URL . "?act=Shop&keyword=" . urlencode($keyword));
+            exit();
+        }
+    }
+
+
 
     public function DetailProduct()
     {
@@ -59,6 +90,21 @@ class HomeController
             $email = $_POST['email'];
             $password = $_POST['mat_khau'];
 
+            $errors = [];
+            if (empty($email)) {
+                $errors['email'] = 'Please enter email';
+            }
+            if (empty($password)) {
+                $errors['password'] = 'Please enter your password';
+            }
+
+            if (!empty($errors)) {
+                $_SESSION['error'] = $errors;
+                header("Location: " . BASE_URL . '?act=Login');
+                exit();
+            }
+
+            // Kiểm tra tài khoản
             $user = $this->accountModel->CheckLogin($email, $password);
 
             if ($user == $email) {
@@ -66,19 +112,19 @@ class HomeController
                 header("Location: " . BASE_URL);
                 exit();
             } else {
-                $_SESSION['error'] = $user;
-                $_SESSION['flash'] = true;
+                $_SESSION['login_error'] = 'Wrong email or password';
                 header("Location: " . BASE_URL . '?act=Login');
                 exit();
             }
         }
     }
 
+
     public function Logout()
     {
         if (isset($_SESSION['user_client'])) {
             unset($_SESSION['user_client']);
-            unset($_SESSION['error']);
+            DeleteSesstionError();
             header("Location: " . BASE_URL);
             exit();
         }
@@ -87,44 +133,49 @@ class HomeController
     public function Register()
     {
         require_once './views/Register.php';
+        DeleteSesstionError();
     }
 
     public function SignUp()
     {
-        // $name = $_GET('ho_ten');
-        // $email = $_GET('email');
-        // $password = $_GET('mat_khau');
-        // $password = $_GET('mat_khau');
-        // $confirmPassword = $_GET('nhap_lai_mat_khau');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $_POST['ho_ten'];
+            $email = $_POST['email'];
+            $password = $_POST['mat_khau'];
+            $confirmPassword = $_POST['nhap_lai_mat_khau'];
 
+            $errors = [];
+            if (empty($name)) {
+                $errors['name'] = 'Please enter your name';
+            }
+            if (empty($email)) {
+                $errors['email'] = 'Please enter email';
+            }
+            if (empty($password)) {
+                $errors['password'] = 'please enter your password';
+            }
+            if (empty($confirmPassword)) {
+                $errors['confirm_password'] = 'Please input one more time of your password';
+            }
+            if ($password !== $confirmPassword) {
+                $errors['confirm_password_notify'] = 'Confirm password does not match';
+            }
 
-        // $errors = [];
-        // if (empty($oldPassword)) {
-        //     $errors['old_password'] = 'Please fill old password';
-        // }
-        // if (empty($newPassword)) {
-        //     $errors['new_password'] = 'please enter your new password';
-        // }
-        // if (empty($confirmPassword)) {
-        //     $errors['confirm_password'] = 'Please input one more time of your new password';
-        // }
-        // if ($password !== $confirmPassword) {
-        //     $errors['confirm_password_notify'] = 'Confirm password does not match';
-        // }
+            $_SESSION['error'] = $errors;
 
-        // $_SESSION['error'] = $errors;
-
-        // if (!$errors) {
-        //     $password = password_hash($password, PASSWORD_BCRYPT);
-        //     $status = $this->accountModel->CreateAccount($user['id'], $password);
-        //     if ($status) {
-        //         header("Location: " . BASE_URL . '?act=Login');
-        //         exit();
-        //     }
-        // } else {
-        //     header("Location: " . BASE_URL_ADMIN);
-        //     exit();
-        // }
+            if (!$errors) {
+                $password = password_hash($password, PASSWORD_BCRYPT);
+                $status = $this->accountModel->CreateAccount($name, $email, $password, 2);
+                if ($status) {
+                    header("Location: " . BASE_URL . '?act=Login');
+                    exit();
+                }
+            } else {
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL . '?act=Register');
+                exit();
+            }
+        }
     }
 
     public function AddToCart()

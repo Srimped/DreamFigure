@@ -22,6 +22,8 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     '/' => (new HomeController()) ->Home(),
+    'Contact' => (new HomeController()) ->Contact(),
+
 
     'Detail-Product' => (new HomeController()) ->DetailProduct(),
     'Add-Cart' => (new HomeController()) ->AddToCart(),
@@ -32,6 +34,8 @@ match ($act) {
     'Order-History' => (new HomeController()) ->OrderHistory(),
     'Order-Detail' => (new HomeController()) ->OrderDetail(),
     'Order-Cancel' => (new HomeController()) ->OrderCancel(),
+    'Shop' => (new HomeController()) ->Shop(),
+    'Search' => (new HomeController()) ->Search(),
 
     'Login' => (new HomeController()) ->LoginForm(),
     'Logout' => (new HomeController()) ->Logout(),

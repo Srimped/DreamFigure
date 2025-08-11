@@ -8,6 +8,28 @@ class Account
     {
         $this->conn = connectDB();
     }
+
+    public function CreateAccount($accountName, $accountEmail, $password, $roleID)
+    {
+        try {
+            $sql = 'INSERT INTO tai_khoans (ho_ten, email, mat_khau, chuc_vu_id)
+                    VALUE (:ho_ten, :email, :mat_khau, :chuc_vu_id)';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':ho_ten' => $accountName,
+                ':email' => $accountEmail,
+                ':mat_khau' => $password,
+                ':chuc_vu_id' => $roleID
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
     public function CheckLogin($email, $password)
     {
         try {

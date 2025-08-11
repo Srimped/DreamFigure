@@ -33,23 +33,38 @@
                         <!-- Login Content Start -->
                         <div class="col-lg-12">
                             <div class="login-reg-form-wrap sign-up-form">
-                                <h5>Singup Form</h5>
-                                <form action="<?= BASE_URL . '<?act=Sign-Up'?>" method="POST">
+                                <h5 class="text-center">Singup Form</h5>
+                                <?php if (isset($_SESSION['error']['confirm_password_notify'])) { ?>
+                                    <p class="text-danger text-center"><?= $_SESSION['error']['confirm_password_notify'] ?></p>
+                                <?php } ?>
+                                <form action="<?= BASE_URL . '?act=Sign-Up' ?>" method="POST">
                                     <div class="single-input-item">
                                         <input type="text" placeholder="Full Name" name="ho_ten" required />
+                                        <?php if (isset($_SESSION['error']['name'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['name'] ?></p>
+                                        <?php } ?>
                                     </div>
                                     <div class="single-input-item">
                                         <input type="email" placeholder="Enter your Email" name="email" required />
+                                        <?php if (isset($_SESSION['error']['email'])) { ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['email'] ?></p>
+                                        <?php } ?>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
                                                 <input type="password" placeholder="Enter your Password" name="mat_khau" required />
+                                                <?php if (isset($_SESSION['error']['password'])) { ?>
+                                                    <p class="text-danger"><?= $_SESSION['error']['password'] ?></p>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
                                                 <input type="password" placeholder="Repeat your Password" name="nhap_lai_mat_khau" required />
+                                                <?php if (isset($_SESSION['error']['confirm_password'])) { ?>
+                                                    <p class="text-danger"><?= $_SESSION['error']['confirm_password'] ?></p>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
