@@ -74,17 +74,18 @@
                                         <ul class="dropdown-list">
                                             <?php if (isset($_SESSION['user_client'])) { ?>
                                                 <li><a href="<?= BASE_URL . '?act=Profile' ?>">My account</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=Order-History' ?>">Order history</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=Logout' ?>">Logout</a></li>
                                             <?php } else { ?>
                                                 <li><a href="<?= BASE_URL . '?act=Login' ?>">login</a></li>
-                                                <li><a href="login-register.html">register</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=Register' ?>">register</a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
+                                        <a href="<?= BASE_URL . '?act=Cart' ?>">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification">2</div>
+                                            <!-- <div class="notification">2</div> -->
                                         </a>
                                     </li>
                                 </ul>

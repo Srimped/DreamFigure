@@ -58,4 +58,22 @@ class Account
             echo "Error" . $e->getMessage();
         }
     }
+
+    public function ResetPassword($id, $password)
+    {
+        try {
+            $sql = 'UPDATE tai_khoans SET mat_khau = :mau_khau WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':mau_khau' => $password,
+                ':id' => $id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
 }

@@ -84,16 +84,18 @@
                                             <?= $product['mo_ta'] ?>
                                         </p>
                                         <form action="<?= BASE_URL . '?act=Add-Cart' ?>" method="POST">
-                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                <h6 class="option-title">qty:</h6>
-                                                <div class="quantity">
-                                                    <input type="hidden" name="san_pham_id" value="<?= $product['id']?>">
-                                                    <div class="pro-qty"><input type="text" value="1" name="so_luong"></div>
+                                            <?php if ($product['so_luong'] > 0): ?>
+                                                <div class="quantity-cart-box d-flex align-items-center">
+                                                    <h6 class="option-title">qty:</h6>
+                                                    <div class="quantity">
+                                                        <input type="hidden" name="san_pham_id" value="<?= $product['id'] ?>">
+                                                        <div class="pro-qty"><input type="text" value="1" name="so_luong"></div>
+                                                    </div>
+                                                    <div class="action_link">
+                                                        <button type="submit" class="btn btn-cart2" href="#">Add to cart</button>
+                                                    </div>
                                                 </div>
-                                                <div class="action_link">
-                                                    <button type="submit" class="btn btn-cart2" href="#">Add to cart</button>
-                                                </div>
-                                            </div>
+                                            <?php endif; ?>
                                         </form>
                                     </div>
                                 </div>

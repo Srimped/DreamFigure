@@ -134,4 +134,73 @@ class Cart
             echo "Error" . $e->getMessage();
         }
     }
+
+    public function ClearDetailCart($cartID)
+    {
+        try {
+            $sql = 'DELETE FROM chi_tiet_gio_hangs WHERE gio_hang_id = :gio_hang_id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':gio_hang_id' => $cartID,
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    public function GetSelectItem($cartID, $productID)
+    {
+        try {
+            $sql = 'SELECT * FROM chi_tiet_gio_hangs WHERE gio_hang_id = :gio_hang_id AND san_pham_id = :san_pham_id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':gio_hang_id' => $cartID,
+                ':san_pham_id' => $productID
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    public function RemoveItem($id)
+    {
+        try {
+            $sql = 'DELETE FROM chi_tiet_gio_hangs WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
+    public function DeleteCart($userID)
+    {
+        try {
+            $sql = 'DELETE FROM gio_hangs WHERE tai_khoan_id = :tai_khoan_id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':tai_khoan_id' => $userID,
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
 }

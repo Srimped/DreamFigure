@@ -69,7 +69,7 @@
                                                         <div class="pro-qty"><input type="text" name="so_luong" value="<?= $soLuong ?>"></div>
                                                     </td>
                                                     <td class="pro-subtotal"><span><?= PriceFormat($total) ?> đ</span></td>
-                                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                                    <td class="pro-remove"><a href="<?= BASE_URL . '?act=Remove-Item&Product-Id=' . $item['san_pham_id'] ?>"><i class="fa fa-trash-o"></i></a></td>
                                                 </tr>
                                             <?php } ?>
                                             <tr>
@@ -97,33 +97,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-5 ml-auto">
-                            <!-- Cart Calculation Area -->
-                            <div class="cart-calculator-wrapper">
-                                <div class="cart-calculate-items">
-                                    <h6>Cart Totals</h6>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <td>Sub Total</td>
-                                                <td><?= PriceFormat($totalPrice) ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shipping</td>
-                                                <td>100.000 đ</td>
-                                            </tr>
-                                            <tr class="total">
-                                                <td>Total</td>
-                                                <td class="total-amount"> <?= PriceFormat($totalPrice + 100000) ?></td>
-                                            </tr>
-                                        </table>
+                    <?php if (!empty($detailCart)) : ?>
+                        <div class="row">
+                            <div class="col-lg-5 ml-auto">
+                                <!-- Cart Calculation Area -->
+                                <div class="cart-calculator-wrapper">
+                                    <div class="cart-calculate-items">
+                                        <h6>Cart Totals</h6>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Sub Total</td>
+                                                    <td><?= PriceFormat($totalPrice) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Shipping</td>
+                                                    <td>100.000 đ</td>
+                                                </tr>
+                                                <tr class="total">
+                                                    <td>Total</td>
+                                                    <td class="total-amount"> <?= PriceFormat($totalPrice + 100000) ?> đ</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
+                                    <a href="<?= BASE_URL . '?act=CheckOut' ?>" class="btn btn-sqr d-block">Proceed Checkout</a>
                                 </div>
-                                <a href="checkout.html" class="btn btn-sqr d-block">Proceed Checkout</a>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

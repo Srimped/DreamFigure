@@ -160,7 +160,7 @@ INSERT INTO phuong_thuc_thanh_toans (id, ten_phuong_thuc) VALUES
 (1, 'Cash on Delivery'),
 (2, 'Bank Transfer'),
 (3, 'Credit Card'),
-(4, 'VNPay');
+(4, 'Paypal');
 
 -- --------------------------------------------------------
 

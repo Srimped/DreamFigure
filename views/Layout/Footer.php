@@ -95,8 +95,7 @@
     </div>
 </footer>
 <!-- footer area end -->
-
-<?php require_once './views/Layout/MiniCart.php' ?>
+ 
 <!-- offcanvas mini cart start -->
 
 <!-- offcanvas mini cart end -->

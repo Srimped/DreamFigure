@@ -32,29 +32,40 @@
                     <div class="row">
                         <!-- Login Content Start -->
                         <div class="col-lg-12">
-                            <div class="login-reg-form-wrap">
-                                <h5 class="text-center">Sign In</h5>
-                                <?php if (isset($_SESSION['error'])) { ?>
-                                    <p class="text-danger text-center"><?= $_SESSION['error'] ?></p>
-                                <?php } ?>
-                                <form action="<?= BASE_URL . '?act=Check-Login' ?>" method="post">
+                            <div class="login-reg-form-wrap sign-up-form">
+                                <h5>Singup Form</h5>
+                                <form action="<?= BASE_URL . '<?act=Sign-Up'?>" method="POST">
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Full Name" name="ho_ten" required />
+                                    </div>
                                     <div class="single-input-item">
                                         <input type="email" placeholder="Enter your Email" name="email" required />
                                     </div>
-                                    <div class="single-input-item">
-                                        <input type="password" placeholder="Enter your Password" name="mat_khau" required />
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="single-input-item">
+                                                <input type="password" placeholder="Enter your Password" name="mat_khau" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="single-input-item">
+                                                <input type="password" placeholder="Repeat your Password" name="nhap_lai_mat_khau" required />
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                            <a href="#" class="forget-pwd">Forget Password?</a>
-                                        </div>
-                                        <br>
-                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                            <a href="<?= BASE_URL . '?act=Register' ?>" class="forget-pwd">Register new user</a>
+                                        <div class="login-reg-form-meta">
+                                            <div class="remember-meta">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="subnewsletter">
+                                                    <label class="custom-control-label" for="subnewsletter">Subscribe
+                                                        Our Newsletter</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <button type="submit" class="btn btn-sqr">Login</button>
+                                        <button class="btn btn-sqr">Register</button>
                                     </div>
                                 </form>
                             </div>

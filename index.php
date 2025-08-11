@@ -13,6 +13,7 @@ require_once './models/Product.php';
 require_once './models/Category.php';
 require_once './models/Account.php';
 require_once './models/Cart.php';
+require_once './models/Order.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -25,10 +26,18 @@ match ($act) {
     'Detail-Product' => (new HomeController()) ->DetailProduct(),
     'Add-Cart' => (new HomeController()) ->AddToCart(),
     'Cart' => (new HomeController()) ->Cart(),
+    'Remove-Item' => (new HomeController()) ->RemoveItem(),
+    'CheckOut' => (new HomeController()) ->CheckOut(),
+    'Checkout-Processing' => (new HomeController()) ->CheckOutProcessing(),
+    'Order-History' => (new HomeController()) ->OrderHistory(),
+    'Order-Detail' => (new HomeController()) ->OrderDetail(),
+    'Order-Cancel' => (new HomeController()) ->OrderCancel(),
 
     'Login' => (new HomeController()) ->LoginForm(),
     'Logout' => (new HomeController()) ->Logout(),
     'Check-Login' => (new HomeController()) ->Login(),
+    'Register' => (new HomeController()) ->Register(),
+    'Sign-Up' => (new HomeController()) ->SignUp(),
     
 
     // 'product-list' => (new HomeController()) ->ProductList(),
