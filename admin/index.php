@@ -78,10 +78,6 @@ match ($act) {
 
     //Route bình luận
     'Update-Status-Comment' =>(new AdminProductController())->UpdateStatusComment(),
-    
-
-
-    // 'Profile' =>(new AdminAccountController())->Profile(),
 
     //Route reset password
     'Reset-Password' =>(new AdminAccountController())->ResetPassword(),

@@ -69,7 +69,7 @@
                                         </a>
                                         <ul class="dropdown-list">
                                             <?php if (isset($_SESSION['user_client'])) { ?>
-                                                <li><a href="<?= BASE_URL . '?act=Profile' ?>">My account</a></li>
+                                                <li><a href="#">My account</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=Order-History' ?>">Order history</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=Logout' ?>">Logout</a></li>
                                             <?php } else { ?>
