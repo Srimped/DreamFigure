@@ -356,20 +356,49 @@ class HomeController
         if (isset($_SESSION['user_client'])) {
             $user = $this->accountModel->GetAccountFromEmail($_SESSION['user_client']);
 
-            $orderList = $this->orderModel->GetOrderFromUser($user['id']);
-            $statusList = $this->orderModel->GetOrderStatus();
-            $status = array_column($statusList, 'ten_trang_thai', 'id');
-            $paymentList = $this->orderModel->GetOrderPayment();
-            $payment = array_column($paymentList, 'ten_phuong_thuc', 'id');
+            if ($user) {
+                $orderList = $this->orderModel->GetOrderFromUser($user['id']);
+                $statusList = $this->orderModel->GetOrderStatus();
+                $status = array_column($statusList, 'ten_trang_thai', 'id');
+                $paymentList = $this->orderModel->GetOrderPayment();
+                $payment = array_column($paymentList, 'ten_phuong_thuc', 'id');
 
-            require_once './views/OrderHistory.php';
+                require_once './views/OrderHistory.php';
+            } else {
+                header('Location: ' . BASE_URL . '?act=Login');
+                exit;
+            }
         } else {
             header('Location: ' . BASE_URL . '?act=Login');
             exit;
         }
     }
 
-    public function OrderDetail() {}
+    public function OrderDetail()
+    {
+        if (isset($_SESSION['user_client'])) {
+            $user = $this->accountModel->GetAccountFromEmail($_SESSION['user_client']);
+            $orderId = $_GET['Order-id'];
+
+            $statusList = $this->orderModel->GetOrderStatus();
+            $status = array_column($statusList, 'ten_trang_thai', 'id');
+            $paymentList = $this->orderModel->GetOrderPayment();
+            $payment = array_column($paymentList, 'ten_phuong_thuc', 'id');
+
+            $order = $this->orderModel->GetOrderById($orderId);
+            $cartDetail = $this->orderModel->GetOrderItemById($orderId);
+
+            if($order['tai_khoan_id'] != $user['id'])
+            {
+                echo "you don't have permission to see this order";
+                exit;
+            }
+            require_once './views/OrderDetail.php';
+        } else {
+            header('Location: ' . BASE_URL . '?act=Login');
+            exit;
+        }
+    }
 
     public function OrderCancel()
     {

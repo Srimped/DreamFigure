@@ -15,7 +15,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="<?= BASE_URL ?>">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=Shop' ?>">shop</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Order history</li>
                                 </ul>
                             </nav>
@@ -56,10 +56,11 @@
                                                 <td><?= $payment[$order['phuong_thuc_thanh_toan_id']] ?></td>
                                                 <td><?= $status[$order['trang_thai_id']] ?></td>
                                                 <td>
+                                                    <a href="<?= BASE_URL . '?act=Order-Detail&Order-id=' . $order['id'] ?>">Detail </a> |
                                                     <?php if ($order['trang_thai_id'] == 1): { ?>
                                                             <a href="<?= BASE_URL . '?act=Order-Cancel&Order-id=' . $order['id'] ?>"
                                                             onclick="return confirm('Do you want to delete this order')">
-                                                                Cancel
+                                                                 Cancel
                                                             </a>
                                                     <?php }
                                                     endif ?>

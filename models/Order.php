@@ -76,6 +76,45 @@ class Order
         }
     }
 
+    public function GetOrderItemById($id)
+    {
+        try {
+            $sql = 'SELECT 
+                        chi_tiet_don_hangs.*,
+                        san_phams.ten_san_pham,
+                        hinh_anh_san_phams.link_hinh_anh
+                    FROM
+                        chi_tiet_don_hangs
+                    JOIN
+                        san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
+                    LEFT JOIN (
+                        SELECT 
+                            san_pham_id, 
+                            link_hinh_anh
+                        FROM 
+                            hinh_anh_san_phams
+                        WHERE 
+                            id IN (
+                                SELECT MIN(id)
+                                FROM hinh_anh_san_phams
+                                GROUP BY san_pham_id
+                            )
+                    ) AS hinh_anh_san_phams ON san_phams.id = hinh_anh_san_phams.san_pham_id
+                    WHERE
+                        chi_tiet_don_hangs.don_hang_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
     public function GetOrderStatus()
     {
         try {

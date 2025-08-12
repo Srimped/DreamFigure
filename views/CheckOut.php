@@ -15,7 +15,8 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="<?= BASE_URL ?>">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=Shop' ?>">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=Cart'?>">cart</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Checkout</li>
                                 </ul>
                             </nav>
@@ -154,9 +155,6 @@
                                                     <label class="custom-control-label" for="cashon">Cash On Delivery</label>
                                                 </div>
                                             </div>
-                                            <div class="payment-method-details" data-method="cash">
-                                                <p>Pay with cash upon delivery.</p>
-                                            </div>
                                         </div>
                                         <div class="single-payment-method">
                                             <div class="payment-method-name">
@@ -165,11 +163,6 @@
                                                     <label class="custom-control-label" for="directbank">Direct Bank
                                                         Transfer</label>
                                                 </div>
-                                            </div>
-                                            <div class="payment-method-details" data-method="bank">
-                                                <p>Make your payment directly into our bank account. Please use your Order
-                                                    ID as the payment reference. Your order will not be shipped until the
-                                                    funds have cleared in our account..</p>
                                             </div>
                                         </div>
                                         <div class="single-payment-method">
@@ -180,10 +173,6 @@
                                                         Credit Card</label>
                                                 </div>
                                             </div>
-                                            <div class="payment-method-details" data-method="check">
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store State
-                                                    / County, Store Postcode.</p>
-                                            </div>
                                         </div>
                                         <div class="single-payment-method">
                                             <div class="payment-method-name">
@@ -191,10 +180,6 @@
                                                     <input type="radio" id="paypalpayment" name="phuong_thuc_thanh_toan_id" value="4" class="custom-control-input" />
                                                     <label class="custom-control-label" for="paypalpayment">Paypal <img src="assets/img/paypal-card.jpg" class="img-fluid paypal-card" alt="Paypal" /></label>
                                                 </div>
-                                            </div>
-                                            <div class="payment-method-details" data-method="paypal">
-                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a
-                                                    PayPal account.</p>
                                             </div>
                                         </div>
                                         <div class="summary-footer-area">
@@ -204,7 +189,6 @@
                                                     the website terms and conditions.</label>
                                             </div>
                                             <button type="submit" class="btn btn-sqr">Place Order</button>
-
                                         </div>
                                     </div>
                                 </div>

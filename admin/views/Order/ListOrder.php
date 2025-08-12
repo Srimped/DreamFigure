@@ -58,7 +58,7 @@
                         <td><?= $order['ten_nguoi_nhan'] ?></td>
                         <td><?= $order['sdt_nguoi_nhan'] ?></td>
                         <td><?= $order['ngay_dat'] ?></td>
-                        <td><?= $order['tong_tien'] ?></td>
+                        <td><?= PriceFormat($order['tong_tien']) ?> đ</td>
                         <td><?= $order['ten_trang_thai'] ?></td>
                         <td>
                           <a href="<?= BASE_URL_ADMIN . '?act=Detail-Order&Order-id=' . $order['id'] ?>">

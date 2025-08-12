@@ -51,8 +51,8 @@ match ($act) {
 
     // Route đơn hàng
     'Order' =>(new AdminOrderController())->OrderList(),
-    // 'Edit-Order-Form' =>(new AdminOrderController())->OrderEditingForm(),
-    // 'Edit-Order' =>(new AdminOrderController())->PostEditingOrder(),
+    'Edit-Order-Form' =>(new AdminOrderController())->OrderEditingForm(),
+    'Edit-Order' =>(new AdminOrderController())->PostEditingOrder(),
     // 'Delete-Order' =>(new AdminOrderController())->DeleteOrder(),
     'Detail-Order' =>(new AdminOrderController())->DetailOrder(),
 

@@ -85,7 +85,7 @@
                                   Invoice
                                   <address>
                                       <strong>ID: <?= $order['ma_don_hang'] ?></strong><br>
-                                      <b>Total:</b> <?= $order['tong_tien'] ?><br>
+                                      <b>Total:</b> <?= PriceFormat($order['tong_tien']) ?> đ<br>
                                       <b>Note:</b> <?= $order['ghi_chu'] ?><br>
                                       <b>Payment:</b> <?= $order['ten_phuong_thuc'] ?><br>
                                   </address>
@@ -113,9 +113,9 @@
                                               <tr>
                                                   <td><?= $key + 1 ?></td>
                                                   <td><?= $product['ten_san_pham'] ?></td>
-                                                  <td><?= $product['don_gia'] ?></td>
+                                                  <td><?= PriceFormat($product['don_gia']) ?> đ</td>
                                                   <td><?= $product['so_luong'] ?></td>
-                                                  <td><?= $product['thanh_tien'] ?></td>
+                                                  <td><?= PriceFormat($product['thanh_tien']) ?> đ</td>
                                               </tr>
                                               <?php $total += $product['thanh_tien']; ?>
                                           <?php endforeach ?>
@@ -137,16 +137,16 @@
                                           <tr>
                                               <th style="width:50%">Subotal: </th>
                                               <td>
-                                                  <?= $total ?>
+                                                  <?= PriceFormat($total) ?> đ
                                               </td>
                                           </tr>
                                           <tr>
                                               <th>Shipping:</th>
-                                              <td>100.000</td>
+                                              <td>100.000 đ</td>
                                           </tr>
                                           <tr>
                                               <th>Total:</th>
-                                              <td><?= $total + 100000 ?></td>
+                                              <td><?= PriceFormat($total + 100000) ?> đ</td>
                                           </tr>
                                       </table>
                                   </div>

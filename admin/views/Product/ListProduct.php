@@ -61,7 +61,7 @@
                       <tr>
                         <td><?= $key + 1 ?></td>
                         <td><?= $product['ten_san_pham'] ?></td>
-                        <td><?= $product['gia_san_pham'] ?></td>
+                        <td><?= PriceFormat($product['gia_san_pham']) ?> đ</td>
                         <td>
                           <img src="<?= BASE_URL . $product['link_hinh_anh'] ?>" style="width: 100px" alt=""
                             onerror="this.onerror=null; this.src='https://yameteshop.vn/wp-content/uploads/2023/06/mohinh-herta-kuru-1.jpg'">

@@ -41,6 +41,37 @@ class AdminOrder
         }
     }
 
+    public function UpdateOrder($id, $name, $phone, $email, $address, $note, $status)
+    {
+        try {
+            $sql = 'UPDATE don_hangs
+                    SET
+                        ten_nguoi_nhan = :ten_nguoi_nhan,
+                        sdt_nguoi_nhan = :sdt_nguoi_nhan,
+                        email_nguoi_nhan = :email_nguoi_nhan,
+                        dia_chi_nguoi_nhan = :dia_chi_nguoi_nhan,
+                        ghi_chu = :ghi_chu,
+                        trang_thai_id = :trang_thai_id
+                    WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id,
+                ':ten_nguoi_nhan' => $name,
+                ':sdt_nguoi_nhan' => $phone,
+                ':email_nguoi_nhan' => $email,
+                ':dia_chi_nguoi_nhan' => $address,
+                ':ghi_chu' => $note,
+                ':trang_thai_id' => $status,
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage();
+        }
+    }
+
     public function GetSelectOrder($id)
     {
         try {
@@ -103,6 +134,4 @@ class AdminOrder
             echo "Error" . $e->getMessage();
         }
     }
-
-    
 }

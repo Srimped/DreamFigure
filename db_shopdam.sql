@@ -46,9 +46,9 @@ CREATE TABLE `chi_tiet_don_hangs` (
   `id` int NOT NULL,
   `don_hang_id` int NOT NULL,
   `san_pham_id` int NOT NULL,
-  `don_gia` decimal(10,2) NOT NULL,
+  `don_gia` decimal(15,2) NOT NULL,
   `so_luong` int NOT NULL,
-  `thanh_tien` decimal(10,2) NOT NULL
+  `thanh_tien` decimal(15,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -116,7 +116,7 @@ CREATE TABLE `don_hangs` (
   `sdt_nguoi_nhan` varchar(15) NOT NULL,
   `dia_chi_nguoi_nhan` text NOT NULL,
   `ngay_dat` date NOT NULL,
-  `tong_tien` decimal(10,2) NOT NULL,
+  `tong_tien` decimal(15,2) NOT NULL,
   `ghi_chu` text,
   `phuong_thuc_thanh_toan_id` int NOT NULL,
   `trang_thai_id` int NOT NULL
@@ -171,7 +171,7 @@ INSERT INTO phuong_thuc_thanh_toans (id, ten_phuong_thuc) VALUES
 CREATE TABLE `san_phams` (
   `id` int NOT NULL,
   `ten_san_pham` varchar(255) NOT NULL,
-  `gia_san_pham` decimal(10,2) NOT NULL,
+  `gia_san_pham` decimal(15,2) NOT NULL,
   `so_luong` int NOT NULL,
   `luot_xem` int DEFAULT '0',
   `mo_ta` text,
