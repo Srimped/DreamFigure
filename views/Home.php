@@ -182,7 +182,7 @@
                                 <?php foreach ($categoryList as $key => $category): ?>
                                     <div class="banner-slide-item">
                                         <figure class="banner-statistics">
-                                            <a href="#">
+                                            <a href="<?= BASE_URL . '?act=Shop&Category-Id=' . $category['id'] ?>">
                                                 <img style="width:  500px;
                                                         height: 700px;
                                                         object-fit: cover;
@@ -191,7 +191,7 @@
                                                     src="./assets/img/banner/cate<?= $key + 1 ?>.png" alt="product banner">
                                             </a>
                                             <div class="banner-content banner-content_style2">
-                                                <h5 class="banner-text3"><a href="#"><?= $category['ten_danh_muc'] ?></a></h5>
+                                                <h5 class="banner-text3"><a href="<?= BASE_URL . '?act=Shop&Category-Id=' . $category['id'] ?>"><?= $category['ten_danh_muc'] ?></a></h5>
                                             </div>
                                         </figure>
                                     </div>

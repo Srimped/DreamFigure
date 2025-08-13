@@ -39,12 +39,16 @@ class HomeController
     public function Shop()
     {
         $categoryList = $this->categoryModel->GetAllCategory();
-
-        if (!empty($_GET['keyword'])) {
-            $keyword = $_GET['keyword'];
-            $productList = $this->productModel->SearchProduct($keyword);
+        if ($_SERVER['REQUEST_METHOD'] = 'GET') {
+            $cateID = $_GET['Category-Id'];
+            $productList = $this->productModel->GetProductByCategory($cateID);
         } else {
-            $productList = $this->productModel->GetAllProduct();
+            if (!empty($_GET['keyword'])) {
+                $keyword = $_GET['keyword'];
+                $productList = $this->productModel->SearchProduct($keyword);
+            } else {
+                $productList = $this->productModel->GetAllProduct();
+            }
         }
         require_once './views/shop.php';
     }
@@ -388,8 +392,7 @@ class HomeController
             $order = $this->orderModel->GetOrderById($orderId);
             $cartDetail = $this->orderModel->GetOrderItemById($orderId);
 
-            if($order['tai_khoan_id'] != $user['id'])
-            {
+            if ($order['tai_khoan_id'] != $user['id']) {
                 echo "you don't have permission to see this order";
                 exit;
             }

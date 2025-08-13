@@ -109,11 +109,11 @@
                                         </tr>
                                         <tr>
                                             <th>Payment method:</th>
-                                            <td><?= $status[$order['phuong_thuc_thanh_toan_id']] ?></td>
+                                            <td><?= $status[$order['trang_thai_id']] ?></td>
                                         </tr>
                                         <tr>
                                             <th>Status:</th>
-                                            <td><?= $payment[$order['trang_thai_id']] ?></td>
+                                            <td><?= $payment[$order['phuong_thuc_thanh_toan_id']] ?></td>
                                         </tr>
                                         
                                     </tbody>
