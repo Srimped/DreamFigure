@@ -89,7 +89,6 @@
                                                     <img class="sec-img" src="<?= BASE_URL . $product['link_hinh_anh'] ?>" alt="product">
                                                 </a>
                                                 <div class="product-badge">
-
                                                 </div>
                                                 <div class="cart-hover">
                                                     <a href="<?= BASE_URL . '?act=Detail-Product&Product-id=' . $product['id'] ?>">
